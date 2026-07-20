@@ -1,0 +1,41 @@
+AWS EC2 Creation Flow .
+
+Step 1: Login to your AWS account. -> Go to: AWS Console -> Search: EC2  Click: EC2 Dashboard
+
+      ↓
+Step 2: Select Region -> Top-right corner Example: Mumbai/ ap-south-1
+      ↓         (Recommendation: Always choose the region closest to your users to reduce latency.)
+
+Step 3: Launch Instance  -> Click Launch Instance -> EC2 Dashboard -> Click: Launch Instance
+      ↓
+Step 4: Name the Instance -> Example: DevOps-Lab 
+      ↓
+Step 5: Choose AMI (Amazon Machine Image) -> Examples: Ubuntu 24.04 LTS, RHEL 9, Windows Server 2022
+      ↓				    (AMI is the operating system template.)
+
+Step 6: Choose Instance Type -> Free Tier: t2.micro or t3.micro
+      ↓			(This defines the CPU and RAM.)
+
+Step 7: Create/Select Key Pair -> Click: Create New Key Pair -> Name: Linux-Key -> Type: RSA -> Format: .pem -> Download: Linux-Key.pem
+      ↓			  (Key Pair is used for SSH login.) Note: Store it securely; you cannot download it again later.
+
+Step 8: Configure Network (VPC/Subnet/Public IP) -> Click: Edit -> VPC: Choose the default VPC (or a custom VPC if you have one). ap-south-1a
+					 -> Auto Assign Public IP: Enable -> YES | Without a public IP, you cannot connect from the internet.
+      ↓
+Step 9: Configure Security Group -> Create Security Group -> Name: Linux-SG -> Rules: Port (22), Protocol (SSH),Purpose (Linux Login) 
+      ↓			-> A Security Group acts as a virtual firewall. Restrict SSH to My IP instead of 0.0.0.0/0 for better security.
+
+Step 10: Configure Storage   -> Default: 8GB -> Example: 20 GB gp3 (Recommended) | Supported volumes
+      ↓
+Step 11: (Optional) Add User Data / IAM Role
+      ↓
+Step 12: Review -> Verify: Instance Name, Ubuntu/Amazon Linux, t2.micro/t3.micro, Key Pair, Security Group, Storage, Public IP
+      ↓
+Step 13: Launch  -> Click: Launch Instance
+      ↓
+Step 14: Wait for Running State
+      ↓
+Step 15: Connect via SSH -> Using SSH: ssh -i Linux-Key.pem ubuntu@Public-IP
+      ↓		-> Amazon Linux user & RHEL user: ec2-user
+
+Verify the Server
